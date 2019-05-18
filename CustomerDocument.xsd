@@ -1,0 +1,62 @@
+<?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>
+<xsd:schema xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;
+targetNamespace=&quot;http://xmlpowercorp&quot;
+xmlns=&quot;http://xmlpowercorp&quot;
+elementFormDefault=&quot;qualified&quot;>
+  <xsd:annotation>
+    <xsd:documentation>
+      Mortgage record XML schema.
+    </xsd:documentation>
+  </xsd:annotation>
+  <xsd:element name=&quot;document&quot; type=&quot;documentType&quot;/>
+  <xsd:complexType name=&quot;documentType&quot;>
+    <xsd:sequence>
+      <xsd:element ref=&quot;comment&quot; minOccurs=&quot;1&quot;/>
+      <xsd:element name=&quot;mortgagee&quot; type=&quot;recordType&quot;/>
+      <xsd:element name=&quot;mortgages&quot; type=&quot;mortgagesType&quot;/>
+      <xsd:element name=&quot;bank&quot; type=&quot;recordType&quot;/>
+    </xsd:sequence>
+    <xsd:attribute name=&quot;documentDate&quot; type=&quot;xsd:date&quot;/>
+  </xsd:complexType>
+  <xsd:complexType name=&quot;recordType&quot;>
+    <xsd:sequence>
+      <xsd:element name=&quot;name&quot; type=&quot;xsd:string&quot;/>
+      <xsd:element name=&quot;location&quot; type=&quot;xsd:string&quot;/>
+      <xsd:element name=&quot;city&quot; type=&quot;xsd:string&quot;/>
+      <xsd:element name=&quot;state&quot; type=&quot;xsd:string&quot;/>
+    </xsd:sequence>
+    <xsd:attribute name=&quot;phone&quot; type=&quot;xsd:string&quot;
+      use=&quot;optional&quot;/>
+    </xsd:complexType>
+    <xsd:complexType name=&quot;mortgagesType&quot;>
+      <xsd:sequence>
+        <xsd:element name=&quot;mortgage&quot; minOccurs=&quot;1&quot; maxOccurs=&quot;8&quot;>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name=&quot;property&quot;
+type=&quot;xsd:string&quot;/>
+              <xsd:element name=&quot;date&quot; type=&quot;xsd:date&quot;
+minOccurs=&quot;0&quot;/>
+              <xsd:element name=&quot;loanAmount&quot;
+type=&quot;xsd:decimal&quot;/>
+              <xsd:element name=&quot;term&quot;>
+              <xsd:simpleType>
+                <xsd:restriction base=&quot;xsd:integer&quot;>
+                  <xsd:maxInclusive value=&quot;30&quot;/>
+                </xsd:restriction>
+              </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name=&quot;loanNumber&quot;
+type=&quot;loanNumberType&quot;/>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  <xsd:simpleType name=&quot;loanNumberType&quot;>
+    <xsd:restriction base=&quot;xsd:string&quot;>
+      <xsd:pattern value=&quot;\d{2} \d{4} \d{2}&quot;/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:element name=&quot;comment&quot; type=&quot;xsd:string&quot;/>
+</xsd:schema>
